@@ -1,0 +1,89 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "Build",
+            "detail": "Build the console app.",
+            "icon": {
+                "id": "tools",
+                "color": "terminal.ansiYellow"
+            },
+            "type": "process",
+            "command": "dotnet",
+            "args": [
+                "build",
+                "--configuration",
+                "Debug"
+            ],
+            "options": {
+                "cwd": "${workspaceFolder}/src/ConsoleApp"
+            },
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": false,
+                "panel": "shared",
+                "showReuseMessage": true,
+                "clear": false
+            },
+            "problemMatcher": "$msCompile"
+        },
+        {
+            "label": "Publish",
+            "detail": "Publish the console app.",
+            "icon": {
+                "id": "package",
+                "color": "terminal.ansiGreen"
+            },
+            "type": "process",
+            "command": "dotnet",
+            "args": [
+                "publish",
+                "--configuration",
+                "Release",
+                "--runtime",
+                "osx-arm64",
+                "--output",
+                "${workspaceFolder}/build"
+            ],
+            "options": {
+                "cwd": "${workspaceFolder}/src/ConsoleApp"
+            },
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": true,
+                "panel": "shared",
+                "showReuseMessage": true,
+                "clear": true
+            },
+            "dependsOn": [
+                "Clean build output"
+            ],
+            "problemMatcher": "$msCompile"
+        },
+        {
+            "label": "Clean build output",
+            "detail": "Clean the output in the build directory.",
+            "hide": true,
+            "type": "shell",
+            "command": "rm",
+            "args": [
+                "-rf",
+                "${workspaceFolder}/build"
+            ],
+            "options": {
+                "cwd": "${workspaceFolder}"
+            },
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": false,
+                "panel": "shared",
+                "showReuseMessage": true,
+                "clear": true
+            },
+            "problemMatcher": []
+        }
+    ]
+}
